@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.0"
 
   backend "s3" {
-    bucket         = "yahoo123-596055752329-ap-south-1-an"
+    bucket         = "yahoo1234-297041783636-ap-south-1-an"
     key            = "terraform/ec2/terraform.tfstate"
     region         = "ap-south-1"
     encrypt        = true
