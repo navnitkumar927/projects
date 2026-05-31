@@ -37,7 +37,7 @@ resource "aws_instance" "web_server" {
   instance_type               = "t3.micro"
   key_name                    = "mumbai"
   subnet_id                   = "subnet-01c1188211b4e0fb4"
-  vpc_security_group_ids      = ["sg-0013983e757f1c30a"]
+  vpc_security_group_ids      = ["sg-020b4ebddc58bf9a1"]
   associate_public_ip_address = true
 
   tags = {
