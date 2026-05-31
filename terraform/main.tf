@@ -2,11 +2,11 @@ terraform {
   required_version = ">= 1.0"
 
   backend "s3" {
-    bucket         = "yahoo1234-297041783636-ap-south-1-an"
-    key            = "terraform/ec2/terraform.tfstate"
-    region         = "ap-south-1"
-    encrypt        = true
-    dynamodb_table = "terraform-state-lock"
+    bucket       = "yahoo1234-297041783636-ap-south-1-an"
+    key          = "terraform/ec2/terraform.tfstate"
+    region       = "ap-south-1"
+    encrypt      = true
+    use_lockfile = true
   }
 
   required_providers {
@@ -21,7 +21,6 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-# Latest Amazon Linux 2023 AMI
 data "aws_ami" "amazon_linux" {
   most_recent = true
 
@@ -33,19 +32,12 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-# EC2 Instance
 resource "aws_instance" "web_server" {
-  ami           = data.aws_ami.amazon_linux.id
-  instance_type = "t3.micro"
-
-  key_name = "mumbai"
-
-  subnet_id = "subnet-0de7c3f57addfa12c"
-
-  vpc_security_group_ids = [
-    "sg-0013983e757f1c30a"
-  ]
-
+  ami                         = data.aws_ami.amazon_linux.id
+  instance_type               = "t3.micro"
+  key_name                    = "mumbai"
+  subnet_id                   = "subnet-01c1188211b4e0fb4"
+  vpc_security_group_ids      = ["sg-0013983e757f1c30a"]
   associate_public_ip_address = true
 
   tags = {
@@ -55,7 +47,6 @@ resource "aws_instance" "web_server" {
   }
 }
 
-# Outputs
 output "instance_id" {
   value = aws_instance.web_server.id
 }
